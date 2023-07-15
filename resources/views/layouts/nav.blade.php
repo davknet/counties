@@ -12,7 +12,7 @@
         <div class="offcanvas-body">
           <ul class="navbar-nav navbar-dark justify-content-start flex-grow-1 pe-3">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="{{ route('dashboard') }}">Dashboard</a>
+              <a class="nav-link active" aria-current="page" href="{{ route('dashboard.index') }}">Dashboard</a>
             </li>
           </ul>
           <ul class="navbar-nav navbar-dark justify-content-end flex-grow-1 pe-3">
