@@ -88,9 +88,9 @@ class DashboardController extends Controller
      * @param  \App\Models\Countries  $countries 
      * @return \Illuminate\Http\Response
      */
-    public function show(Countries  $countries )
+    public function show($id)
     {
-        //
+        
     }
 
     /**
@@ -99,9 +99,18 @@ class DashboardController extends Controller
      * @param  \App\Models\countries $countries
      * @return \Illuminate\Http\Response
      */
-    public function edit(Countries $countries )
+    public function edit($id)
     {
         //
+        
+        $country = Countries::find($id);
+      
+        $data = array(
+            'title'          => "Edit Country",
+            'country'        => $country 
+       );
+     
+        return view('edit', ['data' => $data ]);
     }
 
     /**
@@ -111,9 +120,31 @@ class DashboardController extends Controller
      * @param  \App\Models\Countries $countries 
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Countries $countries)
+    public function update(Request $request, $id )
     {
-        //
+
+        $country = Countries::find($id);
+
+        if( $country['name'] != $request->input('name') ||
+            $country['iso'] != $request->input('iso')  ){
+         $request->validate([
+            'name'     =>   'required|alpha' ,
+            
+            'iso'      =>   'required|unique:countries|alpha|max:2',
+        ]);
+
+
+         $counrtry = Countries::where('id' , $id )->update([
+
+            "name"         => Str::upper($request->input('name')),
+            "iso"          => Str::upper( $request->input('iso')),
+            "img_url"      =>  null ,
+            "user_id"      =>  Auth::id(),
+            "updated_at"   => date('Y-m-d H:i:s') 
+
+         ]);
+        }
+         return redirect('/');
     }
 
     /**

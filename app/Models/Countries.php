@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB; 
+
 
 class Countries extends Model
 {
@@ -12,4 +14,9 @@ class Countries extends Model
     protected $primaaryKey = 'id' ;
     protected $fillable    = [ 'name' , 'iso' , 'img_url' , 'user_id' , 'created_at',  'updated_at'];
     public    $timestamps  = true ;
+
+  
+  
 }
+
+
