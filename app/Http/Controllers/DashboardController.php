@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\dashbord;
+
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Models\Countries;
+use App\Rules\Uppercase;
+use Illuminate\Support\Str ;
+use Illuminate\Support\Facades\Validator;
 
 class DashboardController extends Controller
 {
@@ -55,15 +60,35 @@ class DashboardController extends Controller
     public function store(Request $request)
     {
         //
+      
+         
+        $request->validate([
+            'name'     =>   'required|alpha' ,
+            'iso'      =>  'required|unique:countries|alpha|max:2',
+        ]);
+
+
+        
+         $country             = new Countries();
+         $country->name       = Str::upper($request->name ) ;
+         $country->iso        = Str::upper($request->iso ) ;
+         $country->img_url    = null ;
+         $country->user_id    = Auth::id();
+         $country->created_at = date('Y-m-d H:i:s') ;
+         $country->updated_at = null  ;
+         $country->save();
+
+         return redirect('/');
+
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\dashbord  $dashbord
+     * @param  \App\Models\Countries  $countries 
      * @return \Illuminate\Http\Response
      */
-    public function show(dashbord $dashbord)
+    public function show(Countries  $countries )
     {
         //
     }
@@ -71,10 +96,10 @@ class DashboardController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\dashbord  $dashbord
+     * @param  \App\Models\countries $countries
      * @return \Illuminate\Http\Response
      */
-    public function edit(dashbord $dashbord)
+    public function edit(Countries $countries )
     {
         //
     }
@@ -83,10 +108,10 @@ class DashboardController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\dashbord  $dashbord
+     * @param  \App\Models\Countries $countries 
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, dashbord $dashbord)
+    public function update(Request $request, Countries $countries)
     {
         //
     }
@@ -94,10 +119,10 @@ class DashboardController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\dashbord  $dashbord
+     * @param  \App\Models\Counries  $countries 
      * @return \Illuminate\Http\Response
      */
-    public function destroy(dashbord $dashbord)
+    public function destroy(Countries $countries )
     {
         //
     }

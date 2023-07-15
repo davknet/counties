@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CountryController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
@@ -27,8 +28,9 @@ Route::middleware(['auth'])->group(function () {
   
     Route::get('/' , [DashboardController::class , 'index']) ;
     Route::resource('/dashboard' , DashboardController::class);
+   
 });
 
-
+Route::post('country/store', [CountryController::class, 'store'])->name('country.store');
 
 require __DIR__.'/auth.php';

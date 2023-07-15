@@ -12,19 +12,32 @@
                               Countries 
                           </h1>
                           <div class="col-3">
-                                      <form class="row g-3">
+                            @if ($errors->any())
+                            <div class="alert" style="background: rgb(41, 189, 225) ;">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li style="color:#fff;">{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                           @endif
+                                     
+                            <form class="row g-3" method="POST" action="{{ route("dashboard.store") }}" enctype="multipart/form-data"">
+                                        @csrf
                                         <div class="col-auto">
                                           <label for="name" class="form-label">Name</label>
-                                          <input type="text"  class="form-control-plaintext" id="name" value="" placeholder="Country name">
+                                          <input type="text"  class="form-control-plaintext" name="name" id="name_id" value="" placeholder="Country name">
                                         </div>
                                         <div class="col-auto">
                                           <label for="iso" class="form-label">ISO</label>
-                                          <input type="text" class="form-control" id="iso"  placeholder="ISO">
+                                          <input type="text" class="form-control" id="iso_id"  name="iso" placeholder="ISO">
                                         </div>
                                         <div class="col-auto">
-                                          <button type="submit" class="btn btn-primary mb-3">Create</button>
+                                          <button type="submit" name="submit" class="btn btn-primary mb-3">Create</button>
                                         </div>
                                       </form> 
+
+                                    
                           </div>   
                           <div class="col-7">
                             <table  class="table table-striped">
