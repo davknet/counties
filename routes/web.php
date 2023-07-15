@@ -3,6 +3,7 @@
 use App\Http\Controllers\CountryController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\BlockIpNoneIsralyUsersMiddleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,7 +25,7 @@ use Illuminate\Support\Facades\Route;
 // })->middleware(['auth'])->name('dashboard');
 
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth' , 'block'])->group(function () {
   
     Route::get('/' , [DashboardController::class , 'index']) ;
     Route::resource('/dashboard' , DashboardController::class);
