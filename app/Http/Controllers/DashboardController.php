@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\Countries;
 use App\Rules\Uppercase;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str ;
 use Illuminate\Support\Facades\Validator;
 
@@ -20,8 +21,10 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        //
-
+        
+        // if (Schema::hasTable('countries') && Schema::hasTable('countries') ) {
+            // Code to create table
+        
         $countries  = DB::table('countries')
         ->join('users' , 'countries.user_id' , '=' , 'users.id')
         ->select('countries.id' , 'countries.name' , 'countries.iso' , 'users.name as createdBy' ,

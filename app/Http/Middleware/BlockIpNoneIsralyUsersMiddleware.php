@@ -31,9 +31,9 @@ class BlockIpNoneIsralyUsersMiddleware
         $userIp =  $request->ip() ;
         $ipLocationObj = json_decode(file_get_contents("https://api.iplocation.net/?ip={$userIp}" ));
         
-        if ( $ipLocationObj->country_code2  != "IL") {
-            return response()->json(['message' => "You don't have permission to access this website. your ip ->" . $userIp ]);
-        }
+        // if ( $ipLocationObj->country_code2  != "IL") {
+        //     return response()->json(['message' => "You don't have permission to access this website. your ip ->" . $userIp ]);
+        // }
         return $next($request);
     
     }

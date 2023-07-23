@@ -19,7 +19,7 @@ class BeautifullCountriesTable extends Migration
         $table->char('iso' , 2 )->unique();
         $table->string('img_url')->nullable();
         $table->unsignedBigInteger('user_id');
-        $table->timestamp("created_at");
+        $table->timestamp("created_at")->nullable();
         $table->timestamp("updated_at")->nullable();
         $table->foreign('user_id')->references('id')->on('users');
         });
